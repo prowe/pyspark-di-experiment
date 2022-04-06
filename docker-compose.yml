@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  notebook:
+    image: amazon/aws-glue-libs:glue_libs_3.0.0_image_01
+    ports:
+      - "8888:8888"
+      - "4040:4040"
+    working_dir: /work
+    volumes:
+      - "~/.aws:/home/glue_user/.aws:ro"
+      - ".:/work"
+      # - ".:/home/glue_user/workspace/jupyter_workspace"
+    entrypoint:
+      - bash
+      # - "/home/glue_user/jupyter/jupyter_start.sh"
+    environment:
+      - 'DISABLE_SSL=true'
+      - 'AWS_PROFILE=dev-sandbox'
+      - "AWS_REGION=us-east-2"
