@@ -1,4 +1,4 @@
-from framework import run_with_local_spark, data_source, data_sink, data_calculator
+from .framework import run_with_local_spark, data_source, data_sink, data_calculator
 from os import path
 from pyspark.sql import SparkSession, DataFrame
 
