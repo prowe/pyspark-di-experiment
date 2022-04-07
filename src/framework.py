@@ -7,15 +7,26 @@ from typing import Callable, List
 
 
 def data_source(source_func: Callable) -> Callable:
-    return source_func
+    def wrapped_source(*args, **kwargs):
+        result = source_func(*args, **kwargs)
+        result.printSchema()
+        result.show()
+        return result
+
+    return wrapped_source
 
 
 def data_sink(sink_func: Callable) -> Callable:
-    return sink_func
+    def wrapped_sink(result):
+        result.printSchema()
+        result.show()
+        return sink_func(result)
+
+    return wrapped_sink
 
 
 # Decorator args are addtional arguments here
-def data_calculator(*args, **kwargs) -> Callable:
+def data_calculator(**kwargs) -> Callable:
     sink: Callable = kwargs['sink']
     def wrap_calculator_func(calc_func):
         def wrapped_calculator(*args, **kwargs):
