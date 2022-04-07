@@ -1,4 +1,4 @@
-from .framework import run_with_local_spark, data_source, data_sink, data_calculator
+from framework import run_with_local_spark, data_source, data_sink, data_calculator
 from os import path
 from pyspark.sql import SparkSession, DataFrame
 
@@ -7,13 +7,13 @@ spark = SparkSession.builder.getOrCreate()
 @data_source
 def load_colors() -> DataFrame:
     print('loading colors')
-    return spark.read.csv(f'{path.dirname(__file__)}/test_data/colors.csv', header=True)
+    return spark.read.csv(f'./test_data/colors.csv', header=True)
 
 
 @data_source
 def load_foods() -> DataFrame:
     print('loading foods')
-    return spark.read.csv(f'{path.dirname(__file__)}/test_data/foods.csv', header=True)
+    return spark.read.csv(f'./test_data/foods.csv', header=True)
 
 
 @data_sink

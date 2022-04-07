@@ -1,7 +1,7 @@
 from pytest import fixture
 from pyspark.sql import Row, SparkSession
 from unittest.mock import patch
-from . import build_fruits_job
+import build_fruits_job
 
 @fixture
 def spark():
